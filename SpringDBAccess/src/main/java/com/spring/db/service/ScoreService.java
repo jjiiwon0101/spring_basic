@@ -25,8 +25,7 @@ public class ScoreService implements IScoreService {
 
 	@Override
 	public List<ScoreVO> selectAllScores() {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectAllScores();
 	}
 
 	@Override
