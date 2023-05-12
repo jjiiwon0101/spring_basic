@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.db.model.ScoreVO;
 import com.spring.db.service.IScoreService;
@@ -63,4 +64,43 @@ public void setService(IScoreService service) {
 	   model.addAttribute("sList", service.selectAllScores());
 		
 	}
+	
+	//점수 개별 조회 페이지 요청 메서드
+	@GetMapping("/search")
+	public void search() {
+		System.out.println("/score/search: GET");
+	}
+	
+	//삭제 처리를 완료하신 후 list 요청이 다시 컨트롤러로 들어갈 수 있도록 처리해 보세요.
+    //list요청이 다시 들어가서 list.jsp로 갔을 때, 삭제 이후에 간 것이 판단된다면
+    //브라우저에 '삭제가 완료되었습니다.' 문구를 빨간색으로 띄워보세요.
+    //(RedirectAttributes 사용, 경고창으로 띄워도 좋아요.)
+	@GetMapping("/deleteScore")
+	public String deleteScore(int stuId, RedirectAttributes ra) {
+		System.out.println("삭제할 학번: " + stuId);
+		service.deleteScore(stuId);
+		ra.addFlashAttribute("msg", "delSuccess");
+		
+		return "redirect:/score/list";
+		
+		
+	}
+	
+	//점수 개별 조회 처리 메서드
+	@GetMapping("/selectOne")
+	public String selectOne(int stuId, Model model, RedirectAttributes ra) {
+//		model.addAttribute("stu", service.selectOne(stuId));
+//		return "score/search-result";
+		ScoreVO vo = service.selectOne(stuId);
+		
+		if(vo == null) { //조회결과가 없을 때
+			ra.addFlashAttribute("msg", "학번 정보가 없습니다.");
+			return "redirect:/score/search";
+		} else {
+			model.addAttribute("stu", vo);
+			return "score/search-result";
+		}
+	}
+	
+	
 }

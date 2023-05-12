@@ -30,14 +30,12 @@ public class ScoreService implements IScoreService {
 
 	@Override
 	public void deleteScore(int num) {
-		// TODO Auto-generated method stub
-
+		dao.deleteScore(num);
 	}
 
 	@Override
 	public ScoreVO selectOne(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.selectOne(num);
 	}
 
 }
