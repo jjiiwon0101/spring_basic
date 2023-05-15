@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,13 +19,14 @@
             <th>비고</th>
         </tr>
         
-        <c:forEach var="article" items="">
+        <c:forEach var="article" items="${articles}">
             <tr>
                 <td></td>
                 <td>
-                    <a href="#"></a>
+                    <a href="${article.boardNo}"></a>
                 </td>
-                <td></td>
+                <a href="<c:url value='/board/content?boardNo=${article.boardNo}'/>">${article.title}</a>
+                <td>${article.writer}</td>
                 <td>
                     <a href="#">[삭제]</a>
                 </td>
