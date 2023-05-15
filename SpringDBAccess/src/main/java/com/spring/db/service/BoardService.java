@@ -20,6 +20,10 @@ public class BoardService implements IBoardService{
 		dao.insertArticle(vo);
 		
 	}
+//	@Override
+//	public BoardVO getArticles() {
+//		return dao.getArticle();
+//	}
 	@Override
 	public BoardVO getArticle(int bno) {
 		return dao.getArticle(bno);
@@ -31,13 +35,12 @@ public class BoardService implements IBoardService{
 	}
 
 	@Override
-	public void deleteBoard(int num) {
-		dao.deleteArticle(num);
+	public void deleteBoard(int bno) {
+		dao.deleteArticle(bno);
 		
 	}
 	@Override
 	public void updateArticle(BoardVO vo) {
-		
 		
 	}
 

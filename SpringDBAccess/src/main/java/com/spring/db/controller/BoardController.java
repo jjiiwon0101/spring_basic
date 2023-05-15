@@ -68,10 +68,9 @@ public class BoardController {
     //메서드 이름은 modify(), url: /board/modify -> GET
     //수정하고자 하는 글 정보를 모두 받아와서 modify.jsp로 보내 주세요.(글 번호 같이)
     @GetMapping("/modify")
-    public String modify(int num, Model model) {
-    	BoardVO vo = service.getArticle(num);
-    	model.addAttribute("article", vo);
-    	return "board/modify";
+    public void modify(int boardNo, Model model) {
+    	System.out.println("수정 페이지 이동 요청! 번호: " + boardNo);
+    	model.addAttribute("article", service.getArticle(boardNo));
     }
     
 
@@ -79,23 +78,24 @@ public class BoardController {
     //배치해 주시고 수정을 받아 주세요.
     //수정 처리하는 메서드: modify(), 요청 url: /modify -> POST
     //수정 처리 완료 이후 방금 수정한 글의 상세보기 요청이 다시 들어올 수 있도록 작성하세요.
-    @GetMapping("/modify")
+    @PostMapping("/modify")
     public String modify(BoardVO vo, Model model) {
+    	System.out.println("글 수정 요청! 번호: " + vo.getBoardNo());
     	service.updateArticle(vo);
     	model.addAttribute("article", vo);
     	
-    	return "/board/content";
+    	return "redirect:/board/content?boardNo=" + vo.getBoardNo();
     	
     }
 
     //삭제는 알아서 작성해 주세요. (삭제 클릭하면 해당 글이 삭제될 수 있도록)
     @GetMapping("/deleteBoard")
 	public String deleteBoard(int boardNo, RedirectAttributes br) {
-	System.out.println("삭제할 글: " + boardNo);
-	service.deleteBoard(boardNo);
-	br.addFlashAttribute("msg", "delSuccess");
-	return "redirect/board/list";
-    }
+		System.out.println("삭제할 글: " + boardNo);
+		service.deleteBoard(boardNo);
+		br.addFlashAttribute("msg", "delSuccess");
+		return "redirect:/board/list";
+	    }
 
 
 

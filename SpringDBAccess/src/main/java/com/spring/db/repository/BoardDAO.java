@@ -53,13 +53,17 @@ public class BoardDAO implements IBoardDAO {
 
 	@Override
 	public void deleteArticle(int bno) {
-		// TODO Auto-generated method stub
+		String sql ="DELETE FROM jdbc_board WHERE board_no=?";
+		template.update(sql, bno);
 
 	}
 
 	@Override
 	public void updateArticle(BoardVO vo) {
-		// TODO Auto-generated method stub
+		String sql = "UPDATE jdbc_board "
+				+ "SET writer=?, title=?, content=? "
+				+ "WHERE board_no=?";
+		template.update(sql, vo.getWriter(), vo.getTitle(), vo.getContent(), vo.getBoardNo());
 
 	}
 
