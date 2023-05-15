@@ -35,7 +35,7 @@ public class BoardController {
     public String write(BoardVO vo) {
     	System.out.println("/board/write: POST");
     	System.out.println("vo: " + vo);
-    	service.insertBoard(vo);
+    	service.insertArticle(vo);
     	return "redirect:/board/list";
     }
     
@@ -48,7 +48,7 @@ public class BoardController {
     @GetMapping("/list")
     public void List(Model model) {
     	System.out.println("/board/list: GET");
-    	model.addAttribute("articles", service.selectAllboard());
+    	model.addAttribute("articles", service.getArticles());
     }
     
     
@@ -92,7 +92,7 @@ public class BoardController {
     @GetMapping("/deleteBoard")
 	public String deleteBoard(int boardNo, RedirectAttributes br) {
 		System.out.println("삭제할 글: " + boardNo);
-		service.deleteBoard(boardNo);
+		service.deleteArticle(boardNo);
 		br.addFlashAttribute("msg", "delSuccess");
 		return "redirect:/board/list";
 	    }

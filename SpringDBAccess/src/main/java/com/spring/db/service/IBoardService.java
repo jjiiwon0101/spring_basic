@@ -6,20 +6,19 @@ import com.spring.db.model.BoardVO;
 
 public interface IBoardService {
 	
-	//글 등록 기능
-	void insertBoard(BoardVO vo);
-	
-	//글 조회 기능
-	List<BoardVO> selectAllboard();
-	
-	//글 삭제 기능
-	void deleteBoard(int num);
-	
-	//글 수정 기능
-	void updateArticle(BoardVO vo); 
-	
-	//글 내용 상세 보기
-	BoardVO getArticle(int num);
-	
-	
-}
+	    //게시글 등록
+		void insertArticle(BoardVO vo);
+
+		//전체 게시글 조회
+		List<BoardVO> getArticles();
+
+		//게시글 상세 보기
+		BoardVO getArticle(int bno);
+
+		//게시글 삭제
+		void deleteArticle(int bno);
+
+		//게시글 수정
+		void updateArticle(BoardVO vo);
+
+	}
