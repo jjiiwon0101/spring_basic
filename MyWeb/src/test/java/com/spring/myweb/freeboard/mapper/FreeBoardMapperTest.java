@@ -37,9 +37,9 @@ public class FreeBoardMapperTest {
 		
 		//given: 테스트를 위해 주어질 데이터 (ex:parameter)
 		FreeBoardVO vo = new FreeBoardVO();
-		vo.setTitle("두번째 글");
+		vo.setTitle("뭐하는거지");
 		vo.setWriter("abc1234");
-		vo.setContent("메롱메롱");
+		vo.setContent("짜증나게 하지마셈");
 		
 		//when: 테스트 실제 상황
 		mapper.regist(vo);
@@ -62,7 +62,7 @@ public class FreeBoardMapperTest {
 		
 		list.forEach(vo -> System.out.println(vo)); 
 		
-		assertEquals(1, list.size());
+		assertEquals(2, list.size());
 
 	}
 	
@@ -90,9 +90,9 @@ public class FreeBoardMapperTest {
 	void updateTest() {
 		//given
 		FreeBoardVO vo = new FreeBoardVO();
-		vo.setBno(4);
-		vo.setTitle("수정된 글 제목");
-		vo.setContent("수정된 글 내용");
+		vo.setBno(6);
+		vo.setTitle("안녕");
+		vo.setContent("감사");
 		
 		//when
 		mapper.update(vo);
