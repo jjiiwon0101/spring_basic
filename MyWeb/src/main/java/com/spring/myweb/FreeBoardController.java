@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -39,15 +40,15 @@ public class FreeBoardController {
 	}
 	
 	//글 상세 보기 처리
-	@GetMapping("/content")
-	public String getcontent(int bno, Model model) {
+	@GetMapping("/content/{bno}")
+	public String getcontent(@PathVariable int bno, Model model) {
 		model.addAttribute("article", service.getContent(bno));
 		return "freeboard/freeDetail";
 	}
 	
 	//글 수정 페이지 이동 처리
 	@PostMapping("/modify")
-	public String modify(@ModelAttribute("artile") FreeBoardVO vo) {
+	public String modify(@ModelAttribute("article") FreeBoardVO vo) {
 		return "freeboard/freeModify";
 	}
 	
@@ -55,7 +56,8 @@ public class FreeBoardController {
 	@PostMapping("/update")
 	public String update(FreeBoardVO vo) {
 		service.update(vo);
-		return "redirect:/freeboard/content?bno=" + vo.getBno();
+		return "redirect:/freeboard/content/" + vo.getBno();
+		
 	}
 	
 	//글 삭제 처리

@@ -14,19 +14,19 @@
                             <p>상세보기</p>
                         </div>
                         
-                        <form action="<c:url value='/freeboard/modify' /> method="post">
+                        <form action="<c:url value='/freeboard/modify' />" method="post" >
                             <div>
                                 <label>DATE</label>
                                 <c:if test="${article.updateDate == null}">
                                 	<p>
-                                	<fmt:parseDate value="${vo.regDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both"/>
+                                	<fmt:parseDate value="${article.regDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both"/>
                             		<fmt:formatDate value="${parsedDateTime}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>
                                 	</p>
                                 </c:if>
                                 
-                                <c:if test="${article.updateDate == null}">
+                                <c:if test="${article.updateDate != null}">
                                 	<p>
-                                	<fmt:parseDate value="${vo.updateDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedUpdateTime" type="both"/>
+                                	<fmt:parseDate value="${article.updateDate}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedUpdateTime" type="both"/>
                             		<fmt:formatDate value="${parsedUpdateTime}" pattern="yyyy년 MM월 dd일 HH시 mm분"/>
                                 	</p>
                                 </c:if>
@@ -51,7 +51,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary" onclick="return confirm('변경 페이지로 이동합니다.')">변경</button>
-                            <button type="button" class="btn btn-dark" onclick="location.href=${pageContext.request.contextPath}/freeboard/freeList">목록</button>
+                            <button type="button" class="btn btn-dark" onclick="location.href='${pageContext.request.contextPath}/freeboard/freeList'">목록</button>
                     </form>
                 </div>
             </div>
@@ -64,7 +64,7 @@
                     <div class="col-xs-12 col-md-9 write-wrap">
                         <form class="reply-wrap">
                             <div class="reply-image">
-                                <img src="../resources/img/profile.png">
+                                <img src="${pageContext.request.contextPath}/img/profile.png">
                             </div>
                             <!--form-control은 부트스트랩의 클래스입니다-->
 	                    <div class="reply-content">
@@ -85,7 +85,7 @@
                         <div id="replyList">
                         <div class='reply-wrap'>
                             <div class='reply-image'>
-                                <img src='../resources/img/profile.png'>
+                                <img src='${pageContext.request.contextPath}/img/profile.png'>
                             </div>
                             <div class='reply-content'>
                                 <div class='reply-group'>
