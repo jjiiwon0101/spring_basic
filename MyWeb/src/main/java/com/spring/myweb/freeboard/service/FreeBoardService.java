@@ -27,8 +27,8 @@ public class FreeBoardService implements IFreeBoardService {
 	}
 	
 	@Override
-	public int getTotal() {	
-		return mapper.getTotal();
+	public int getTotal(PageVO vo) {	
+		return mapper.getTotal(vo);
 	}
 
 	@Override

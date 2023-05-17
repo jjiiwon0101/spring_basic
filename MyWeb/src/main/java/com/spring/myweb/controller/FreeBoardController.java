@@ -14,8 +14,11 @@ import com.spring.myweb.freeboard.service.IFreeBoardService;
 import com.spring.myweb.util.PageCreator;
 import com.spring.myweb.util.PageVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/freeboard")
+@Slf4j //log4j의 부모버전으로 오버라이드 -> log4j로 쓰면 버전이 달라질떄 사용불가.
 public class FreeBoardController {
 
 	@Autowired
@@ -25,9 +28,9 @@ public class FreeBoardController {
 	@GetMapping("/freeList")
 	public void freeList(PageVO vo, Model model) {
 		
-		PageCreator pc = new PageCreator(vo, service.getTotal());
+		PageCreator pc = new PageCreator(vo, service.getTotal(vo));
 		
-		System.out.println(pc.toString());
+		log.info(pc.toString());
 		
 		model.addAttribute("boardList", service.getList(vo));
 		model.addAttribute("pc", pc);
