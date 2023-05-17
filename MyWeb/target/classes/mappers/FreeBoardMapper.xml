@@ -13,6 +13,12 @@
 	<select id="getList" resultType="board">
 		SELECT * FROM freeboard
 		ORDER BY bno DESC
+		LIMIT #{pageStart}, #{cpp}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM freeboard
 	</select>
 	
 	<select id="getContent" resultType="board">
