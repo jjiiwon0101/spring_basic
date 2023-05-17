@@ -19,13 +19,13 @@
                     <!--form select를 가져온다 -->
                     <form action="<c:url value='/freeboard/freeList'/>">
 					    <div class="search-wrap">
-			                     <button type="submit" class="btn btn-info search-btn">검색</button>
-			                     <input type="text" name="keyword" class="form-control search-input">
+			                     <button type="submit" class="btn btn-info search-btn" value="">검색</button>
+			                     <input type="text" name="keyword" class="form-control search-input" value="${pc.paging.keyword}">
 			                     <select name="condition" class="form-control search-select">
-			                          <option value="title">제목</option>
-			                          <option value="content">내용</option>
-			                          <option value="writer">작성자</option>
-			                          <option value="titleContent">제목+내용</option>
+			                          <option value="title" ${pc.paging.condition == 'title' ? 'selected' : '' }>제목</option>
+			                          <option value="content" ${pc.paging.condition == 'content' ? 'selected' : '' }>내용</option>
+			                          <option value="writer" ${pc.paging.condition == 'writer' ? 'selected' : '' }>작성자</option>
+			                          <option value="titleContent" ${pc.paging.condition == 'titleContent' ? 'selected' : '' }>제목+내용</option>
 			                     </select>
 			            </div>
 		    </form>
