@@ -112,6 +112,22 @@
 <%@ include file="../include/footer.jsp" %>
 
     <script>
+
+        //아이디 중복 체크
+        document.getElementById('idCheckBtn').onclick = function() {
+            const userId = document.getElementById('userId').value;
+            if(userId === '') {
+                alert('아이디는 필수값입니다.')
+                return;
+            }
+
+            //아이디 중복확인 비동기 요청 준비
+
+        };
+
+
+
+
         /*아이디 형식 검사 스크립트*/
         var id = document.getElementById("userId");
         id.onkeyup = function() {
@@ -125,7 +141,7 @@
             var regex = /^[A-Za-z0-9+]{8,16}$/; 
             if(regex.test(document.getElementById("userId").value )) {
                 document.getElementById("userId").style.borderColor = "green";
-                document.getElementById("msgId").innerHTML = "아이디중복체크는 필수 입니다(～￣▽￣)~";
+                document.getElementById("msgId").innerHTML = "아이디중복체크는 필수 입니다.";
                 document.getElementById("userId").style.borderColor = "red";
                 document.getElementById("msgId").innerHTML = "비밀번호를 제대로 입력하세요.";
             }
