@@ -12,27 +12,29 @@
         #{userEmail1}, #{userEmail2}, #{addrBasic}, #{addrDetail}, #{addrZipNum})
     </insert>
 
-	<select id="checkId">
-		SELECT user_id, user_pw
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*)
 		FROM users
-		WHERE users_id = #{userId}, users_pw = #{userPw}
+		WHERE user_id = #{id}
 	</select>
 	
 	<select id="login" resultType="user">
-		SELECT user_id, user_pw
-		FROM users
-		WHERE 
+		SELECT * FROM users
+		WHERE user_id = #{id}
+		AND user_pw = #{pw}
 	</select>
 	
 	<select id="getInfo" resultType="user">
 		SELECT * FROM users
-		WHERE user_id = #{userId}
+		WHERE user_id = #{id}
 	</select>
 	
 	<update id="updateUser">
 		UPDATE users
-		SET user_pw=#{userPw}, user_name=#{userName}, user_Phone1=#{userPhone1}, user_phone2=#{userPhone2}, user_email1=#{userEmail1}, 
-		user_email2=#{userEmail2}, addr_basic=#{addrBasic}, addr_detail=#{addrDetail}, addr_zip_num=#{addrZipNum}
+		SET user_pw=#{userPw}, user_name=#{userName}, 
+		user_Phone1=#{userPhone1}, user_phone2=#{userPhone2}, 
+		user_email1=#{userEmail1}, user_email2=#{userEmail2}, 
+		addr_basic=#{addrBasic}, addr_detail=#{addrDetail}, addr_zip_num=#{addrZipNum}
 		WHERE user_id = #{userId}
 	</update>
 
