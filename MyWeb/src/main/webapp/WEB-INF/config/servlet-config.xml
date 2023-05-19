@@ -17,7 +17,6 @@
 		<beans:property name="locations">
 			<beans:list>
 				<beans:value>classpath:/properties/email.properties</beans:value>
-				<beans:value>classpath:/properties/Hikari.properties</beans:value>
 			</beans:list>
 		</beans:property>
 	</beans:bean>

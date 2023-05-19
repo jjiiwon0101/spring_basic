@@ -65,8 +65,8 @@ public class MailSenderService {
 			
 			//메일 전송
 			mailSender.send(message);
-		} catch (MessagingException e) {
 			
+		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
 	}

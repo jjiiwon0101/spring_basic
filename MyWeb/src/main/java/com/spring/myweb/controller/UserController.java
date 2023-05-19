@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.myweb.user.service.IUserService;
+import com.spring.myweb.util.MailSenderService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +20,8 @@ public class UserController {
 
 	@Autowired
 	private IUserService service;
+	@Autowired
+	private MailSenderService mailService;
 	
 	//회원가입 페이지로 이동
 	@GetMapping("/userJoin")
@@ -40,7 +43,8 @@ public class UserController {
 	@GetMapping("/mailCheck")
 	@ResponseBody
 	public String mailCheck(String email) {
-		log.info("이메일 인증 요청 들어옴:" + email);
+		log.info("이메일 인증 요청 들어옴:" + email); //메인 서비스한테 메일 보내달라고 하는거임
+		return mailService.joinEmail(email);
 		
 	}
 	
