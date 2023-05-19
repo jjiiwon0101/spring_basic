@@ -16,6 +16,8 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	private IUserMapper mapper;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	@Override
 	public int idCheck(String id) {
@@ -39,13 +41,23 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserVO login(String id, String pw) {
+		//id 정보를 기반으로 회원의 정보를 조회
+		UserVO vo = getInfo(id); //내 메서드를 받아서 컨트롤러부터 전달
+		if(vo != null) {
+			String dbPw = vo.getUserPw(); //DB에서 가져온 암호화 된 비밀번호.
+			//날것의 비밀번호와 암호화된 비밀번호의 일치 여부를 알려주는 matches()
+			if(encoder.matches(pw, dbPw)) {
+				return vo;
+			}
+		}
+		
+		
 		return mapper.login(id, pw);
 	}
 
 	@Override
 	public UserVO getInfo(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.getInfo(id);
 	}
 
 	@Override
