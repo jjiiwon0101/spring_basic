@@ -180,6 +180,7 @@
                         console.log(data);
                     });
                     */
+                   //요청에 관련된 정보 객체
                    const reqObj = {
                     method: 'post',
                     headers: {
