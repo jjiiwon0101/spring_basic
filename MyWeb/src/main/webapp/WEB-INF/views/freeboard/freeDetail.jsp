@@ -113,7 +113,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="btn btn-default pull-right" data-dismiss="modal">닫기</button>
-					<h4 class="modal-title">댓글수정</h4>
+					<h4 class="modal-title">댓글 수정</h4>
 				</div>
 				<div class="modal-body">
 					<!-- 수정폼 id값을 확인하세요-->
@@ -298,6 +298,10 @@
                 //댓글이 여러 개 -> 수정, 삭제가 발생하는 댓글이 몇 번인지도 확인 
                 const rno = e.target.getAttribute('href');
                 console.log('댓글 번호: ' + rno);
+
+                //모달 내부에 숨겨진 input 태그에 댓글 번호를 담아주자.
+                document.getElementById('modalRno').value = rno;
+
                 const content = e.target.parentNode.nextElementSibling.textContent;
                 console.log('댓글 내용: ' + content);
 
@@ -305,7 +309,13 @@
                 //조건문을 작성. (모달 하나로 수정, 삭제를 처리. 그러기 위해 디자인 조정.)
                 if(e.target.classList.contains('replyModify')) {
                     //수정 버튼을 눌렀으므로 수정 모달 형식을 꾸며주겠다.
+                    document.querySelector('.modal-title').textContent = '댓글 수정';
+                    document.getElementById('modalReply').style.display = 'inline'; //댓글창
+                    document.getElementById('modalReply').value = content;
+                    document.getElementById('modalModBtn').style.display = 'inline';
+                    document.getElementById('modalDelBtn').style.display = 'none';
 
+                    //제이쿼리를 이용해서 bootstrap 모달을 여는 방법.
                     $('#replyModal').modal('show');
 
 
