@@ -320,11 +320,74 @@
 
 
                 } else {
-
+                    //삭제 버튼을 눌렀으므로 삭제 모달 형식으로 꾸며줌.
+                    document.querySelector('.modal-title').textContent = '댓글 삭제';
+                    document.getElementById('modalReply').style.display = 'none'; //댓글창
+                    document.getElementById('modalModBtn').style.display = 'none';
+                    document.getElementById('modalDelBtn').style.display = 'inline';
+                    $('#replyModal').modal('show');
                 }
 
-            });
+            }); //수정 or 삭제 버튼 클릭 이벤트 끝.
 
+            //수정 처리 함수.(수정 모달을 열어서 수정 내용을 작성 후 수정 버튼을 클릭했을 때)
+            document.getElementById('modalModBtn').onclick = () => {
+
+                const reply = document.getElementById('modalReply').value;
+                const rno = document.getElementById('modalRno').value;
+                const replyPw = document.getElementById('modalPw').value;
+
+                if(reply === '' || replyPw === '') {
+                    alert('내용, 비밀번호를 확인하세요!');
+                    return;
+                }
+
+                const reqObj = {
+                    method: 'put',
+                    headers: { 'Content-type':'application/json' },
+
+                    body: JSON.stringify({
+                        'reply' : reply,
+                        'replyPw' : replyPw
+                    })
+                };
+
+                fetch('${pageContext.request.contextPath}/reply/' + rno, reqObj)
+                    .then(res => res.text())
+                    .then(data => {
+                        if(data === 'pwFail') {
+                            alert('비밀번호를 확인하세요.');
+                            document.getElementById('modalPw').value = '';
+                            document.getElementById('modalPw').focus();
+                            
+                        } else {
+                            alert('정상 수정 되었습니다.');
+                            document.getElementById('modalReply').value = '';
+                            document.getElementById('modalPw').value = '';
+                            //제이쿼리 문법으로 bootstrap 모달 닫아주기
+                            $('#replyModal').modal('hide');
+                            getList(1, true);
+                        }
+                    });
+            }// end update event
+
+            //삭제 이벤트
+            document.getElementById('modalDelBtn').onclick = () => {
+                /*
+                1. 모달창에 rno값, replyPw값을 얻습니다.
+                2. fetch 함수를 이용해서 DELETE 방식으로 reply/{rno} 요청
+
+                3. 서버에서는 요청을 받아서 비밀번호를 확인하고, 비밀번호가 맞으면
+                    삭제를 진행하시면 됩니다.
+
+                4. 만약 비밀번호가 틀렸다면, 문자열을 반환해서
+                    '비밀번호가 틀렸습니다.' 경고창을 띄우세요.
+
+                삭제 완료되면 모달 닫고 목록 요청 다시 보내세요 (reset의 여부를 잘 판단)
+                */
+
+
+            }
 
 
 
