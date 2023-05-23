@@ -18,6 +18,7 @@ public class ReplyService implements IReplyService {
 	@Autowired
 	private IReplyMapper mapper;
 	
+	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	@Override
@@ -43,8 +44,7 @@ public class ReplyService implements IReplyService {
 
 	@Override
 	public int getTotal(int bno) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapper.getTotal(bno);
 	}
 
 	@Override
