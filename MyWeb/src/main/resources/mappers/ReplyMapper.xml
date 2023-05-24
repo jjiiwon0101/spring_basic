@@ -35,4 +35,14 @@
 		WHERE rno = #{rno}
 	</update>
 	
+	<delete id="delete">
+		DELETE FROM freereply
+		WHERE rno = #{rno}	
+	</delete>
+	
+	<select id="countReply" resultType ="int">
+        SELECT count(*) FROM freereply
+        WHERE bno = #{bno}
+    </select>
+	
 </mapper>

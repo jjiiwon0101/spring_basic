@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,6 +72,20 @@ public class ReplyController {
 			return "pwFail";
 		}
 		
+	}
+	
+	//댓글 삭제 요청
+	@DeleteMapping("/{rno}")
+	public String delete(@PathVariable int rno, @RequestBody ReplyVO vo) {
+		vo.setRno(rno);
+		
+		if(service.pwCheck(vo)) {
+			service.delete(rno); //여기서 rno 받아서 freeDetail에서 다시 받아줄 필요x
+			return "deleteSuccess";
+			
+		} else {
+			return "pwFail";
+		}
 	}
 	
 	

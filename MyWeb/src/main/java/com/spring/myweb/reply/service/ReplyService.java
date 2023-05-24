@@ -62,7 +62,7 @@ public class ReplyService implements IReplyService {
 
 	@Override
 	public void delete(int rno) {
-		// TODO Auto-generated method stub
+		mapper.delete(rno);
 
 	}
 
