@@ -93,6 +93,8 @@ public class UserController {
 		KakaoService.getUserProfile(accessToken);
 		
 		//여기까지가 카카오 로그인 api가 제공하는 기능의 끝입니다.
+		//추가 입력 정보가 필요하다면 추가 입력할 수 있는 페이지로 보내셔서 입력을 더 받아서
+		//데이터베이스에 데이터를 집어넣으면 됩니다.
 		
 		
 	}

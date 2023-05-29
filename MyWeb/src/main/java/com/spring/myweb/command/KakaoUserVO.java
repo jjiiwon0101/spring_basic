@@ -40,7 +40,7 @@ public class KakaoUserVO {
 			@JsonProperty("profile_image_url")
 			private String profileImageUrl;
 			
-			@JsonProperty("thumnail_image_url")
+			@JsonProperty("thumbnail_image_url")
 			private String thumbnailImageUrl;
 		}
 	}

@@ -5,6 +5,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Map;
 import java.util.UUID;
 
@@ -98,7 +102,9 @@ public class kakaoService {
 
 	/*Access Token을 이용하여 카카오 사용자 프로필 API 요청*/
 	public KakaoUserVO getUserProfile(String accessToken) {
-	String requestUri = "https://kapi.kakao.com/v2/user/me";
+	
+		
+String requestUri = "https://kapi.kakao.com/v2/user/me";
 		
 		//요청 헤더 설정
 		HttpHeaders headers = new HttpHeaders();
@@ -116,7 +122,6 @@ public class kakaoService {
 		//응답 바디 읽기.
 		KakaoUserVO responseData = responseEntity.getBody();
 		log.info("user profile: {}", responseData);
-		
 		return responseData;
 	}
 }
