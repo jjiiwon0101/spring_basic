@@ -89,6 +89,12 @@ public class UserController {
 		String accessToken =  KakaoService.getAccessToken(session, code, state);
 		log.info("access 토큰값: {}", accessToken);
 		
+		//accessToken을 이용하여 로그인 사용자 정보를 읽어 오자.
+		KakaoService.getUserProfile(accessToken);
+		
+		//여기까지가 카카오 로그인 api가 제공하는 기능의 끝입니다.
+		
+		
 	}
 	
 	

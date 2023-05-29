@@ -16,6 +16,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.spring.myweb.command.KakaoUserVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -91,5 +93,30 @@ public class kakaoService {
 			return null;
 		}
 		
+	}
+
+
+	/*Access Token을 이용하여 카카오 사용자 프로필 API 요청*/
+	public KakaoUserVO getUserProfile(String accessToken) {
+	String requestUri = "https://kapi.kakao.com/v2/user/me";
+		
+		//요청 헤더 설정
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Bearer " + accessToken);
+		
+		//요청 보내기
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<KakaoUserVO> responseEntity = template.exchange(
+				requestUri,
+				HttpMethod.GET,
+				new HttpEntity<>(headers),
+			    KakaoUserVO.class
+				);
+		
+		//응답 바디 읽기.
+		KakaoUserVO responseData = responseEntity.getBody();
+		log.info("user profile: {}", responseData);
+		
+		return responseData;
 	}
 }
