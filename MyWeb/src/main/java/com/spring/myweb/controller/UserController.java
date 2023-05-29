@@ -82,6 +82,14 @@ public class UserController {
 	
 	//카카오 로그인 성공 시 callback
 	@GetMapping("/kakao_callback")
+	public void callbackKakao(String code, String state, 
+								HttpSession session, Model model ) {
+		log.info("로그인 성공! callbackKakao 호출!");
+		log.info("인가 코드: {}", code);
+		String accessToken =  KakaoService.getAccessToken(session, code, state);
+		log.info("access 토큰값: {}", accessToken);
+		
+	}
 	
 	
 	//로그인 요청
